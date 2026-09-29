@@ -1,0 +1,18 @@
+{
+  "reference_code": "BH-JUF-0001",
+  "property_type": "apartment",
+  "transaction_type": "rent",
+  "location": "juffair",
+  "price_bhd": 550,
+  "bedrooms": 2,
+  "bathrooms": 2,
+  "area_sqm": 120,
+  "furnished": true,
+  "parking": true,
+  "verified_features": [
+    "balcony",
+    "gym access",
+    "near restaurants"
+  ],
+  "internal_notes": "Synthetic example only. Do not use customer data in this repository."
+}

@@ -1,0 +1,40 @@
+[build-system]
+requires = ["setuptools>=75"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "aqari-ai"
+version = "0.1.0"
+description = "AWS serverless AI assistant for controlled real-estate listing generation."
+readme = "README.md"
+requires-python = ">=3.12"
+authors = [
+  { name = "Ahmed Al Naghi" }
+]
+dependencies = [
+  "pydantic>=2.10,<3.0"
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.3,<9.0",
+  "ruff>=0.9,<1.0"
+]
+
+[tool.setuptools]
+package-dir = { "" = "backend/src" }
+
+[tool.setuptools.packages.find]
+where = ["backend/src"]
+
+[tool.pytest.ini_options]
+testpaths = ["backend/tests"]
+pythonpath = ["backend/src"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP"]

@@ -1,0 +1,82 @@
+from decimal import Decimal
+from enum import StrEnum
+
+from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
+
+
+class PropertyType(StrEnum):
+    APARTMENT = "apartment"
+    VILLA = "villa"
+    OFFICE = "office"
+    LAND = "land"
+    BUILDING = "building"
+
+
+class TransactionType(StrEnum):
+    RENT = "rent"
+    SALE = "sale"
+
+
+class ListingStatus(StrEnum):
+    DRAFT = "draft"
+    PENDING_REVIEW = "pending_review"
+    APPROVED = "approved"
+    EXPORTED = "exported"
+
+
+class PropertyDraftCreate(BaseModel):
+    model_config = ConfigDict(str_strip_whitespace=True)
+
+    reference_code: str = Field(
+        min_length=3,
+        max_length=64,
+        pattern=r"^[A-Za-z0-9_-]+$",
+        examples=["BH-JUF-0001"],
+    )
+    property_type: PropertyType
+    transaction_type: TransactionType
+    location: str = Field(min_length=2, max_length=100, examples=["Juffair"])
+    price_bhd: Decimal = Field(gt=0, max_digits=12, decimal_places=3, examples=[550])
+    bedrooms: int | None = Field(default=None, ge=0, le=30)
+    bathrooms: int | None = Field(default=None, ge=0, le=30)
+    area_sqm: Decimal | None = Field(default=None, gt=0, max_digits=12, decimal_places=2)
+    furnished: bool | None = None
+    parking: bool | None = None
+    verified_features: list[str] = Field(default_factory=list, max_length=30)
+    internal_notes: str | None = Field(default=None, max_length=1000)
+
+    @field_validator("location")
+    @classmethod
+    def normalise_location(cls, value: str) -> str:
+        return " ".join(word.capitalize() for word in value.split())
+
+    @field_validator("verified_features")
+    @classmethod
+    def clean_features(cls, features: list[str]) -> list[str]:
+        cleaned_features = []
+        seen_features = set()
+
+        for feature in features:
+            normalised = " ".join(feature.split()).lower()
+            if not normalised or normalised in seen_features:
+                continue
+            cleaned_features.append(normalised)
+            seen_features.add(normalised)
+
+        return cleaned_features
+
+    @model_validator(mode="after")
+    def validate_residential_fields(self) -> "PropertyDraftCreate":
+        residential_types = {PropertyType.APARTMENT, PropertyType.VILLA}
+
+        if self.property_type in residential_types and self.bedrooms is None:
+            raise ValueError("bedrooms is required for apartments and villas")
+
+        if self.property_type in residential_types and self.bathrooms is None:
+            raise ValueError("bathrooms is required for apartments and villas")
+
+        return self
+
+
+class PropertyDraft(PropertyDraftCreate):
+    listing_status: ListingStatus = ListingStatus.DRAFT
