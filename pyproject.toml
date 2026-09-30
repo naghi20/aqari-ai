@@ -12,6 +12,7 @@ authors = [
   { name = "Ahmed Al Naghi" }
 ]
 dependencies = [
+  "boto3>=1.35,<2.0",
   "pydantic>=2.10,<3.0"
 ]
 
