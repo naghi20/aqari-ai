@@ -96,3 +96,7 @@ frontend/.env.*
 *.swo
 .DS_Store
 Thumbs.db
+
+# Local AWS Lambda invocation responses
+response.json
+lambda-response.json
