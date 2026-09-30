@@ -42,7 +42,7 @@ def _response(status_code: int, body: dict[str, Any]) -> dict[str, Any]:
 
 
 def lambda_handler(event: dict[str, Any], context: object) -> dict[str, Any]:
-    """Validate a synthetic property record and create a DynamoDB draft item."""
+    """Validate a property payload and create a DynamoDB draft item."""
 
     request_id = getattr(context, "aws_request_id", "local-development")
 
@@ -50,7 +50,10 @@ def lambda_handler(event: dict[str, Any], context: object) -> dict[str, Any]:
         property_payload = event.get("property", event)
         property_draft = PropertyDraftCreate.model_validate(property_payload)
     except ValidationError as error:
-        LOGGER.warning("Property draft validation failed", extra={"request_id": request_id})
+        LOGGER.warning(
+            "Property draft validation failed",
+            extra={"request_id": request_id},
+        )
 
         return _response(
             400,
@@ -66,6 +69,7 @@ def lambda_handler(event: dict[str, Any], context: object) -> dict[str, Any]:
 
     property_data = property_draft.model_dump(mode="python")
     property_data.pop("internal_notes", None)
+    property_data.pop("internal_details", None)
 
     item = {
         "property_id": property_id,
