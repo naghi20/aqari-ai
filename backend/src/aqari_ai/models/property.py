@@ -144,8 +144,7 @@ class PropertyDraftCreate(BaseModel):
             raise ValueError("bathrooms is required for apartments and villas")
 
         parking_was_sent_in_features = (
-            "features" in self.model_fields_set
-            and "parking" in self.features.model_fields_set
+            "features" in self.model_fields_set and "parking" in self.features.model_fields_set
         )
 
         if self.parking is None and parking_was_sent_in_features:
@@ -160,8 +159,7 @@ class PropertyDraftCreate(BaseModel):
             and self.parking != self.features.parking
         ):
             raise ValueError(
-                "parking and features.parking must have the same value "
-                "when both are provided"
+                "parking and features.parking must have the same value when both are provided"
             )
 
         return self
