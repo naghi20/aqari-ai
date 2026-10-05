@@ -4,6 +4,8 @@ AQARI AI is an AWS-focused, serverless AI assistant for controlled real-estate l
 
 It is designed for a Bahrain real-estate workflow in which an authorized agent enters verified property facts and uploads approved property photos. The system generates editable listing drafts, SEO content, and social-media drafts while keeping a human responsible for factual verification and external publication.
 
+<img width="2048" height="1152" alt="image" src="https://github.com/user-attachments/assets/97a36dd8-a97f-4d89-aa99-7ea9afeded29" />
+
 ## Project status
 
 **Current phase:** Local repository baseline and domain validation.
@@ -16,9 +18,11 @@ It is designed for a Bahrain real-estate workflow in which an authorized agent e
 - Require human review before Joomla or social-media publication
 - Export an approved listing package for manual Joomla publishing
 
+
 ## Planned AWS architecture
 
 ```text
+
 Admin dashboard
       |
       v
@@ -105,3 +109,5 @@ See [docs/data-privacy.md](docs/data-privacy.md) for the planned data-handling p
 11. Joomla draft integration
 12. Meta social-media publishing integration
 13. Property-search chatbot with controlled retrieval
+
+
