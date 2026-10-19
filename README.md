@@ -88,6 +88,15 @@ graph TD
 *   **Amazon DynamoDB:** Maintains real-time application persistence across transactional status phases.
 *   **Amazon CloudWatch Logs:** Serves as the immutable log ledger tracking strict data compliance and manual overrides.
 
+## Security principles
+
+- No real property data, images, customer details, database exports, passwords, API keys, or tokens are committed to this repository.
+- Original property images remain private.
+- AI receives only human-verified property facts and approved photo references.
+- AI output is a draft, not a source of truth.
+- External Joomla, Facebook, or Instagram publication requires human approval.
+- AWS credentials are supplied through AWS IAM roles and local AWS CLI configuration, never committed to Git.
+
 
 
 
@@ -123,14 +132,6 @@ AWS Lambda (Python)
       +--> Amazon Cognito: administrator authentication
 ```
 
-## Security principles
-
-- No real property data, images, customer details, database exports, passwords, API keys, or tokens are committed to this repository.
-- Original property images remain private.
-- AI receives only human-verified property facts and approved photo references.
-- AI output is a draft, not a source of truth.
-- External Joomla, Facebook, or Instagram publication requires human approval.
-- AWS credentials are supplied through AWS IAM roles and local AWS CLI configuration, never committed to Git.
 
 ## Local setup
 
