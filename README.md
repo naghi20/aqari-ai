@@ -4,6 +4,10 @@ AQARI AI is an AWS-focused, serverless AI assistant for controlled real-estate l
 
 It is designed for a Bahrain real-estate workflow in which an authorized agent enters verified property facts and uploads approved property photos. The system generates editable listing drafts, SEO content, and social-media drafts while keeping a human responsible for factual verification and external publication.
 
+ Complete AQARI AI workflow - LLMOps + governance + AIOps design 
+
+“AQARI AI uses a controlled draft workflow. The LLM generates a description only from verified property fields. Validation checks grounding and forbidden claims. A passing draft goes to human approval; a failing draft is flagged for review after a controlled retry. Only an approved draft can be published, while rejected drafts remain blocked and auditable.”
+
 <img width="2048" height="1152" alt="image" src="https://github.com/user-attachments/assets/97a36dd8-a97f-4d89-aa99-7ea9afeded29" />
 
 ## Project status
@@ -157,5 +161,3 @@ Once human approval is secured, the data triggers three parallel downstream acti
 *   ** Meta Social Media Publishing Integration:** Formats and queues the listing for social channels.
 *   ** Property-Search Chatbot:** Synchronizes the approved record with the controlled retrieval vector database for client-facing queries.
 
-LLMOps + governance + AIOps design - Complete AQARI AI workflow
-“AQARI AI uses a controlled draft workflow. The LLM generates a description only from verified property fields. Validation checks grounding and forbidden claims. A passing draft goes to human approval; a failing draft is flagged for review after a controlled retry. Only an approved draft can be published, while rejected drafts remain blocked and auditable.”
