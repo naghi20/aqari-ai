@@ -136,7 +136,6 @@ graph TD
     I --> L[13. Meta Social Media Publishing Integration]
     I --> M[14. Property-Search Chatbot with Controlled Retrieval]
 ```
-LLMOps + governance + AIOps design - Complete AQARI AI workflow
 
 ## Architecture Breakdown
 
@@ -158,5 +157,5 @@ Once human approval is secured, the data triggers three parallel downstream acti
 *   ** Meta Social Media Publishing Integration:** Formats and queues the listing for social channels.
 *   ** Property-Search Chatbot:** Synchronizes the approved record with the controlled retrieval vector database for client-facing queries.
 
-
+LLMOps + governance + AIOps design - Complete AQARI AI workflow
 “AQARI AI uses a controlled draft workflow. The LLM generates a description only from verified property fields. Validation checks grounding and forbidden claims. A passing draft goes to human approval; a failing draft is flagged for review after a controlled retry. Only an approved draft can be published, while rejected drafts remain blocked and auditable.”
