@@ -1,6 +1,6 @@
 # AQARI AI
 
-AQARI AI is an AWS-focused, serverless AI assistant for controlled real-estate listing generation.
+AQARI AI is an AWS-focused, serverless AI assistant for controlled real-estate listing generation for classic old versions of joomla websites.
 
 It is designed for a Bahrain real-estate workflow in which an authorized agent enters verified property facts and uploads approved property photos. The system generates editable listing drafts, SEO content, and social-media drafts while keeping a human responsible for factual verification and external publication.
 
