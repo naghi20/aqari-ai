@@ -136,6 +136,7 @@ graph TD
     I --> L[13. Meta Social Media Publishing Integration]
     I --> M[14. Property-Search Chatbot with Controlled Retrieval]
 ```
+LLMOps + governance + AIOps design - Complete AQARI AI workflow
 
 ## Architecture Breakdown
 
@@ -156,4 +157,5 @@ Once human approval is secured, the data triggers three parallel downstream acti
 *   ** Joomla Draft Integration:** Updates and optimizes the record directly in the CMS backend.
 *   ** Meta Social Media Publishing Integration:** Formats and queues the listing for social channels.
 *   ** Property-Search Chatbot:** Synchronizes the approved record with the controlled retrieval vector database for client-facing queries.
+
 
