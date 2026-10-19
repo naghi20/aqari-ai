@@ -106,8 +106,54 @@ See [docs/data-privacy.md](docs/data-privacy.md) for the planned data-handling p
 8. GitHub Actions CI/CD
 9. Rekognition photo analysis
 10. Step Functions approval workflow
-11. Joomla draft integration
-12. Meta social-media publishing integration
-13. Property-search chatbot with controlled retrieval
 
+
+
+
+
+# AQARI AI Flow: AI Layer
+
+This section outlines the automated AI processing pipeline for the **AQARI AI Flow**, which handles property ingestion, multi-stage LLM validation, and automated publishing integration.
+
+## Workflow Diagram
+
+```mermaid
+graph TD
+    A[Joomla Property Record] --> B[Extract & Validate Structured Fields]
+    B --> C[LLM Generates Description <br><i>using only verified fields</i>]
+    C --> D{Grounding + Forbidden-Claim Validation}
+    
+    D -- Pass --> E[Pending Human Approval]
+    D -- Fail 1x --> F[Regenerate with Stricter Prompt]
+    F --> D
+    D -- Fail 2x --> G[Flagged for Human Review]
+
+    E --> H{Human Decision}
+    H -- Approved --> I[Publish]
+    H -- Rejected --> J[Do Not Publish / Retain Audit Record]
+
+    I --> K[12. Joomla Draft Integration]
+    I --> L[13. Meta Social Media Publishing Integration]
+    I --> M[14. Property-Search Chatbot with Controlled Retrieval]
+```
+
+## Architecture Breakdown
+
+### 1. Ingestion & Core Pipeline
+*   **Data Ingestion:** Starts directly from the **Joomla property record**.
+*   **Field Extraction:** Extracts and validates structured fields to establish a factual baseline.
+*   **Generation:** The LLM generates property descriptions strictly constrained to the verified fields.
+
+### 2. Multi-Stage Guardrails & Validation
+*   **Grounding Check:** Every generated text undergoes automated strict verification against source data.
+*   **Forbidden-Claim Validation:** Filters out non-compliant or illegal marketing claims.
+*   **Error Handling Loop:** 
+    *   *First Failure:* Automatically triggers a re-generation using an escalated, stricter prompt.
+    *   *Second Failure:* Escalates immediately out of the automated loop and flags the record for manual review.
+
+### 3. Publishing & Downstream Integrations
+Once human approval is secured, the data triggers three parallel downstream actions:
+*   ** Joomla Draft Integration:** Updates and optimizes the record directly in the CMS backend.
+*   ** Meta Social Media Publishing Integration:** Formats and queues the listing for social channels.
+*   ** Property-Search Chatbot:** Synchronizes the approved record with the controlled retrieval vector database for client-facing queries.
 
